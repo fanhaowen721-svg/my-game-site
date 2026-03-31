@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>首页 - 玩家个人主页</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#005e64",
+              "on-error": "#490006",
+              "surface-bright": "#2c2b33",
+              "primary-fixed-dim": "#00deec",
+              "secondary-dim": "#bb00fc",
+              "error": "#ff716c",
+              "outline": "#76747b",
+              "outline-variant": "#48474d",
+              "on-surface-variant": "#acaab1",
+              "primary-fixed": "#00eefc",
+              "secondary-fixed-dim": "#eaaeff",
+              "secondary": "#d674ff",
+              "on-secondary-fixed-variant": "#8400b3",
+              "surface-container-low": "#131318",
+              "tertiary": "#deffab",
+              "surface-container-high": "#1f1f26",
+              "on-tertiary-container": "#3c5c00",
+              "background": "#0e0e13",
+              "surface": "#0e0e13",
+              "secondary-fixed": "#f1c1ff",
+              "tertiary-container": "#abfc00",
+              "tertiary-fixed-dim": "#a0ed00",
+              "surface-container": "#19191f",
+              "inverse-on-surface": "#55545a",
+              "on-secondary-container": "#fff5fc",
+              "surface-variant": "#25252c",
+              "surface-container-highest": "#25252c",
+              "on-secondary-fixed": "#580079",
+              "on-primary": "#005d63",
+              "on-surface": "#f8f5fd",
+              "on-background": "#f8f5fd",
+              "inverse-surface": "#fbf8ff",
+              "inverse-primary": "#006a71",
+              "surface-container-lowest": "#000000",
+              "on-error-container": "#ffa8a3",
+              "primary": "#8ff5ff",
+              "error-dim": "#d7383b",
+              "surface-dim": "#0e0e13",
+              "on-primary-container": "#005359",
+              "primary-dim": "#00deec",
+              "on-tertiary-fixed-variant": "#446700",
+              "tertiary-dim": "#a0ed00",
+              "tertiary-fixed": "#abfc00",
+              "on-tertiary-fixed": "#2e4800",
+              "secondary-container": "#9900cf",
+              "surface-tint": "#8ff5ff",
+              "on-secondary": "#390050",
+              "on-tertiary": "#436600",
+              "on-primary-fixed": "#003f43",
+              "error-container": "#9f0519",
+              "primary-container": "#00eefc"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(37, 37, 44, 0.4);
+            backdrop-filter: blur(20px);
+            border-top: 1.5px solid rgba(143, 245, 255, 0.3);
+            border-left: 1.5px solid rgba(143, 245, 255, 0.1);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(143, 245, 255, 0.2);
+        }
+        .diagonal-cut {
+            clip-path: polygon(0 0, 95% 0, 100% 15%, 100% 100%, 5% 100%, 0 85%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+</nav>
+<nav class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl border-b border-[#48474d]/20 shadow-[0_4px_20px_rgba(0,240,255,0.05)] flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black tracking-tighter text-[#8ff5ff] drop-shadow-[0_0_8px_rgba(143,245,255,0.5)] font-headline uppercase tracking-tighter">KINETIC_OS</span>
+</div>
+<div class="hidden md:flex items-center gap-8 font-headline uppercase tracking-tighter">
+<a class="text-[#8ff5ff] border-b-2 border-[#8ff5ff] pb-1 transition-colors" href="index.html">个人主页</a>
+<a class="text-[#acaab1] hover:text-[#f8f5fd] transition-colors" href="record.html">历史战绩</a>
+<a class="text-[#acaab1] hover:text-[#f8f5fd] transition-colors" href="stats.html">高光时刻</a>
+<a class="text-[#acaab1] hover:text-[#f8f5fd] transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#8ff5ff] hover:bg-[#1f1f26] transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-primary/30" src="tuxiang.jpg"/>
+</div>
+</nav>
+<main class="pt-24 pb-32 px-6 lg:px-24 max-w-7xl mx-auto space-y-24">
+<!-- Hero Section -->
+<section class="relative flex flex-col lg:flex-row items-center gap-12 py-12">
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+<div class="relative w-48 h-48 lg:w-64 lg:h-64 rounded-full overflow-hidden border-2 border-primary-fixed/50">
+<img alt="User Level 99 Avatar" class="w-full h-full object-cover" src="tuxiang.jpg"/>
+</div>
+<div class="absolute bottom-4 right-4 bg-tertiary-container text-on-tertiary px-3 py-1 rounded-sm font-headline font-bold text-sm tracking-widest shadow-lg">
+                    LVL 99
+                </div>
+</div>
+<div class="flex-1 text-center lg:text-left space-y-6">
+<h1 class="font-headline text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
+                    欢迎来到 <span class="text-primary italic">桃桃桃夭夭</span> 的个人空间
+                </h1>
+<div class="flex flex-wrap justify-center lg:justify-start gap-4">
+<div class="bg-surface-container border border-outline-variant/30 p-4 min-w-[160px] diagonal-cut">
+<p class="text-on-surface-variant text-[10px] uppercase font-bold tracking-widest mb-1">近期胜率</p>
+<p class="font-headline text-3xl font-black text-primary italic">100%</p>
+</div>
+<div class="bg-surface-container border border-outline-variant/30 p-4 min-w-[160px] diagonal-cut">
+<p class="text-on-surface-variant text-[10px] uppercase font-bold tracking-widest mb-1">最近常玩</p>
+<p class="font-headline text-3xl font-black text-secondary italic">瓦洛兰特</p>
+</div>
+</div>
+<div class="flex gap-4 pt-4 justify-center lg:justify-start">
+<div class="flex gap-4 pt-4 justify-center lg:justify-start">
+<a href="https://www.douyin.com/user/Lv_1218" target="_blank"
+   class="bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-black uppercase px-8 py-3 tracking-tighter active:scale-95 transition-transform neon-glow-primary inline-block text-center hover:scale-105">
+    🎬 关注我的抖音
+</a>
+<button class="border border-secondary text-secondary font-headline font-black uppercase px-8 py-3 tracking-tighter hover:bg-secondary/10 transition-colors">
+                        发送讯息
+                    </button>
+</div>
+</div>
+</section>
+<!-- High Performance Grid: 近期高光记录 -->
+<section class="space-y-8">
+<div class="flex items-end justify-between border-b border-outline-variant/20 pb-4">
+<h2 class="font-headline text-3xl font-black uppercase tracking-tighter">近期高光记录 <span class="text-primary">HIGHLIGHTS</span></h2>
+<a class="text-tertiary text-xs font-bold tracking-widest hover:underline" href="#">查看全部</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Highlight Card 1 -->
+<div class="glass-card overflow-hidden group">
+<div class="relative aspect-video overflow-hidden">
+<img alt="Gameplay" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="High-octane futuristic first-person shooter action scene with vibrant neon tracers and explosions in a rainy cyberpunk city alley" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXCAPbP6zSTzKZZzglZr5Kf3KGuE6oDodu5V0IBTBivnJM0Pa66-v6Q4V5kwFHrl3oN60tcT1n_t00Sn4KUlgEM1NpyuNsjzfEBCzWbbMOiXnhvvFhcNb-4AbrHJqWLrISAG1QLpnDonk3XhtbCl2K7mXvOHEGrhQcgE_ItRlF25PiN-ToXwLRd3-BzcI9IZayI-8yRzEtVFcjCQHyKbKR15UO7O0HqJsq1QdW0vZnzcVNZsy28ZQYU6HEsABG45xy9smNHFZbYX4"/>
+<div class="absolute top-2 right-2 bg-background/80 backdrop-blur-md px-2 py-1 text-[10px] font-bold text-primary">02:45</div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex justify-between items-start">
+<h3 class="font-headline font-bold text-lg leading-tight uppercase">五连杀决战时刻</h3>
+<span class="text-on-surface-variant text-[10px] font-mono">2024.05.12</span>
+</div>
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider">APEX LEGENDS</p>
+</div>
+</div>
+<!-- Highlight Card 2 -->
+<div class="glass-card overflow-hidden group">
+<div class="relative aspect-video overflow-hidden">
+<img alt="Gameplay" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Sci-fi racing game cinematic shot with a glowing magenta car speeding through a neon-lit futuristic highway at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf_j85xJLS9A7oCgoobTRbyHZkZQA5h_YajTyixaftjpUFh4jyfXN5W03-IjyO00QCG6PQLK7Pxia7SkkD3n0sGi-A4TC-R_T3COmJAHd8aEoLcsIGC8m_xmLQp3gsslaHxKabS4Ru31J2OfGFAEZn5NdjpyzyzBQvDVG41zEfRd46CNaj2F8CQXWPwbe7uvumvmzj_MJoVniK-Q_3nqkDdFa6Ayg0SwnW8Bo5Pexdhr8EEl1F69oZ44wNvzFc9rF69auSW9CSDPo"/>
+<div class="absolute top-2 right-2 bg-background/80 backdrop-blur-md px-2 py-1 text-[10px] font-bold text-primary">01:12</div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex justify-between items-start">
+<h3 class="font-headline font-bold text-lg leading-tight uppercase">极限漂移纪录突破</h3>
+<span class="text-on-surface-variant text-[10px] font-mono">2024.05.10</span>
+</div>
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider">CYBER DRIVER</p>
+</div>
+</div>
+<!-- Highlight Card 3 -->
+<div class="glass-card overflow-hidden group">
+<div class="relative aspect-video overflow-hidden">
+<img alt="Gameplay" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Dark fantasy game character standing on a cliff edge overlooking a massive futuristic castle silhouette with a dual moon sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkCAEKJ8zKXHttoRy99fBvrHGiblRRs-lm090GaV7Tj2RXzumBdUp7vI5FTHT_h4yEJeMxxtpBqpa04mo5pqGMtRnEGJFK0tzn6kPYnTVo_L_6d8aZ-FHrF3KADFE7Bx-BzTF9A85IJRcvlDP5n5Neqiw9lXdM65xVLijDIc6KPcnYL5zHB0CvlzLERQ5eVKaNVpSN-N3jraJgds8yuvdm_KJtNe1RZgQfRTN_87AEM8KBatwa_H6rrlkKDLxM0YKgk0DHbA5J1pI"/>
+<div class="absolute top-2 right-2 bg-background/80 backdrop-blur-md px-2 py-1 text-[10px] font-bold text-primary">05:20</div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex justify-between items-start">
+<h3 class="font-headline font-bold text-lg leading-tight uppercase">单挑最终BOSS成功</h3>
+<span class="text-on-surface-variant text-[10px] font-mono">2024.05.08</span>
+</div>
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-wider">ELDEN RING</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Section: Season Progress & Feed -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Current Season Progress -->
+<div class="lg:col-span-5 space-y-8">
+<div class="flex items-end justify-between border-b border-outline-variant/20 pb-4">
+<h2 class="font-headline text-2xl font-black uppercase tracking-tighter">当前赛季进度 <span class="text-secondary">V26 第二幕</span></h2>
+</div>
+<div class="bg-surface-container p-6 border border-outline-variant/20 relative">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center bg-secondary/20 text-secondary border border-secondary/40">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<div>
+<h4 class="font-headline font-bold">白银 Ⅲ</h4>
+<p class="text-[10px] text-on-surface-variant font-bold">距离黄金还需 77 分</p>
+</div>
+</div>
+<span class="font-headline text-2xl font-black text-secondary">78%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-lowest mb-8">
+<div class="h-full bg-gradient-to-r from-secondary to-secondary-dim" style="width: 78%"></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-high p-4 border-l-2 border-primary">
+<p class="text-[10px] text-on-surface-variant font-bold uppercase">赛季对局</p>
+<p class="font-headline text-xl font-bold">61</p>
+</div>
+<div class="bg-surface-container-high p-4 border-l-2 border-tertiary">
+<p class="text-[10px] text-on-surface-variant font-bold uppercase">ACS</p>
+<p class="font-headline text-xl font-bold">236</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Feed -->
+<div class="lg:col-span-7 space-y-8">
+<div class="flex items-end justify-between border-b border-outline-variant/20 pb-4">
+<h2 class="font-headline text-2xl font-black uppercase tracking-tighter">活跃动态 <span class="text-tertiary">ACTIVITY</span></h2>
+</div>
+<div class="space-y-4">
+<!-- Activity 1 -->
+<div class="flex gap-4 items-start p-4 hover:bg-surface-container transition-colors group">
+<div class="w-10 h-10 rounded-sm bg-surface-container-high flex items-center justify-center text-primary shrink-0 border border-outline-variant/20 group-hover:border-primary/50">
+<span class="material-symbols-outlined">emoji_events</span>
+</div>
+<div class="space-y-1">
+<p class="text-sm font-medium"><span class="text-primary font-bold">获得成就：</span> 成功入职上班</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">2 天前 // 现实生活</p>
+</div>
+</div>
+<!-- Activity 2 -->
+<div class="flex gap-4 items-start p-4 hover:bg-surface-container transition-colors group">
+<div class="w-10 h-10 rounded-sm bg-surface-container-high flex items-center justify-center text-secondary shrink-0 border border-outline-variant/20 group-hover:border-secondary/50">
+<span class="material-symbols-outlined">group_add</span>
+</div>
+<div class="space-y-1">
+<p class="text-sm font-medium">与 <span class="text-secondary font-bold">夭夭夭桃桃</span> 达成了 100 场开黑合作</p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">12 小时前 // 瓦洛兰特</p>
+</div>
+</div>
+<!-- Activity 3 -->
+<div class="flex gap-4 items-start p-4 hover:bg-surface-container transition-colors group">
+<div class="w-10 h-10 rounded-sm bg-surface-container-high flex items-center justify-center text-tertiary shrink-0 border border-outline-variant/20 group-hover:border-tertiary/50">
+<span class="material-symbols-outlined">video_library</span>
+</div>
+<div class="space-y-1">
+<p class="text-sm font-medium">上传了新的视频攻略：<span class="text-tertiary font-bold">"荒坂塔速通指南 1.2"</span></p>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">昨天 // CYBERPUNK 2077</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- SideNavBar (Social) -->
+<aside class="hidden lg:flex fixed left-0 top-16 h-[calc(100vh-64px)] w-20 border-r border-[#48474d]/20 bg-[#0e0e13] flex-col items-center py-8 gap-8">
+<div class="flex flex-col items-center gap-1 mb-4">
+<span class="text-[#8ff5ff] font-bold font-headline text-xs">导航</span>
+<div class="w-1 h-1 bg-tertiary rounded-full animate-pulse"></div>
+</div>
+<a class="text-[#48474d] hover:text-[#d674ff] transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined text-2xl">live_tv</span>
+</a>
+<a class="text-[#8ff5ff] scale-110" href="#">
+<span class="material-symbols-outlined text-2xl">group</span>
+</a>
+<a class="text-[#48474d] hover:text-[#d674ff] transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined text-2xl">chat</span>
+</a>
+<a class="text-[#48474d] hover:text-[#d674ff] transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined text-2xl">video_library</span>
+</a>
+</aside>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 bg-[#131318]/90 backdrop-blur-lg border-t border-[#48474d]/30 flex justify-around items-center pb-safe z-50">
+<a class="flex flex-col items-center justify-center text-[#8ff5ff] drop-shadow-[0_0_5px_rgba(143,245,255,0.8)] font-headline text-[10px] uppercase font-bold" href="#">
+<span class="material-symbols-outlined">home</span>
+<span>Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#acaab1] font-headline text-[10px] uppercase font-bold" href="#">
+<span class="material-symbols-outlined">sports_esports</span>
+<span>Matches</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#acaab1] font-headline text-[10px] uppercase font-bold" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span>Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#acaab1] font-headline text-[10px] uppercase font-bold" href="#">
+<span class="material-symbols-outlined">person</span>
+<span>Profile</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-[#1f1f26] bg-[#0e0e13] flex flex-col items-center justify-center gap-4">
+<span class="text-[#8ff5ff] font-bold font-headline tracking-tighter text-xl">KINETIC_OS</span>
+<div class="flex gap-6 text-[10px] font-['Inter'] tracking-widest text-[#acaab1] uppercase">
+<a class="hover:text-[#deffab] transition-colors" href="#">Privacy</a>
+<a class="hover:text-[#deffab] transition-colors" href="#">Terms</a>
+<a class="hover:text-[#deffab] transition-colors" href="#">Support</a>
+</div>
+<p class="text-[10px] tracking-widest text-[#48474d] font-bold uppercase">© 2024 KINETIC_OS // HIGH PERFORMANCE INTERFACE</p>
+</footer>
+</body></html>

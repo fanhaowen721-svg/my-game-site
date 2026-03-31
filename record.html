@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="zh"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC_OS // 游戏记录列表</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary-fixed-variant": "#005e64",
+            "on-error": "#490006",
+            "surface-bright": "#2c2b33",
+            "primary-fixed-dim": "#00deec",
+            "secondary-dim": "#bb00fc",
+            "error": "#ff716c",
+            "outline": "#76747b",
+            "outline-variant": "#48474d",
+            "on-surface-variant": "#acaab1",
+            "primary-fixed": "#00eefc",
+            "secondary-fixed-dim": "#eaaeff",
+            "secondary": "#d674ff",
+            "on-secondary-fixed-variant": "#8400b3",
+            "surface-container-low": "#131318",
+            "tertiary": "#deffab",
+            "surface-container-high": "#1f1f26",
+            "on-tertiary-container": "#3c5c00",
+            "background": "#0e0e13",
+            "surface": "#0e0e13",
+            "secondary-fixed": "#f1c1ff",
+            "tertiary-container": "#abfc00",
+            "tertiary-fixed-dim": "#a0ed00",
+            "surface-container": "#19191f",
+            "inverse-on-surface": "#55545a",
+            "on-secondary-container": "#fff5fc",
+            "surface-variant": "#25252c",
+            "surface-container-highest": "#25252c",
+            "on-secondary-fixed": "#580079",
+            "on-primary": "#005d63",
+            "on-surface": "#f8f5fd",
+            "on-background": "#f8f5fd",
+            "inverse-surface": "#fbf8ff",
+            "inverse-primary": "#006a71",
+            "surface-container-lowest": "#000000",
+            "on-error-container": "#ffa8a3",
+            "primary": "#8ff5ff",
+            "error-dim": "#d7383b",
+            "surface-dim": "#0e0e13",
+            "on-primary-container": "#005359",
+            "primary-dim": "#00deec",
+            "on-tertiary-fixed-variant": "#446700",
+            "tertiary-dim": "#a0ed00",
+            "tertiary-fixed": "#abfc00",
+            "on-tertiary-fixed": "#2e4800",
+            "secondary-container": "#9900cf",
+            "surface-tint": "#8ff5ff",
+            "on-secondary": "#390050",
+            "on-tertiary": "#436600",
+            "on-primary-fixed": "#003f43",
+            "error-container": "#9f0519",
+            "primary-container": "#00eefc"
+          },
+          fontFamily: {
+            "headline": ["Space Grotesk"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-card {
+      background: rgba(37, 37, 44, 0.3);
+      backdrop-filter: blur(20px);
+      border-top: 1.5px solid rgba(143, 245, 255, 0.2);
+      border-left: 1.5px solid rgba(143, 245, 255, 0.2);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .status-glow-win {
+      filter: drop-shadow(0 0 8px rgba(143, 245, 255, 0.6));
+    }
+    .status-glow-loss {
+      filter: drop-shadow(0 0 8px rgba(255, 113, 108, 0.6));
+    }
+    .clip-bevel {
+      clip-path: polygon(0% 0%, 95% 0%, 100% 15%, 100% 100%, 5% 100%, 0% 85%);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl border-b border-[#48474d]/20 shadow-[0_4px_20px_rgba(0,240,255,0.05)]">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-7xl mx-auto">
+<div class="text-2xl font-black tracking-tighter text-[#8ff5ff] drop-shadow-[0_0_8px_rgba(143,245,255,0.5)] font-['Space_Grotesk'] uppercase">
+        KINETIC_OS
+      </div>
+<nav class="hidden md:flex gap-8 items-center font-['Space_Grotesk'] uppercase tracking-tighter">
+<a class="text-[#acaab1] hover:text-[#f8f5fd] transition-colors" href="index.html">个人主页</a>
+<a class="text-[#8ff5ff] border-b-2 border-[#8ff5ff] pb-1" href="record.html">历史战绩</a>
+<a class="text-[#acaab1] hover:text-[#f8f5fd] transition-colors" href="stats.html">高光时刻</a>
+<a class="text-[#acaab1] hover:text-[#f8f5fd] transition-colors" href="#">更多</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#8ff5ff] hover:bg-[#1f1f26] transition-all duration-200 p-2 rounded">notifications</button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-primary/30" data-alt="Cyberpunk style digital avatar of a high-level gaming profile with neon cyan highlights and tech visor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg0Ekj150wSApF56tzTPbPthyhqKaDT_MY5G872q8qJnsUIE3T05avOEPlphBB7iU3oTZwwD9vGi1Iv95K9ehXPhJA5D5Jm65oGAFdffTtyDa40LNosmUJ9ddRrxAjjL-rky7Cowcj_xTuaL-4h8f4dYueg8TFFKiUT4kAp56thzgay8RXOOGDS7Lav1K2vurouFCBJJo0Loh7r_D9ff14-7CzHF87PrPfUAtA1QKC2oeP5cnmdKONT7mknm6CNr8zAa7h-L2Or2w"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-20 px-4 md:px-12 max-w-7xl mx-auto min-h-screen flex flex-col md:flex-row gap-8">
+<!-- Sidebar Filters (SideNav Hybrid) -->
+<aside class="hidden lg:flex flex-col w-64 gap-6 shrink-0">
+<div class="surface-container bg-surface-container p-6 border-l-4 border-primary">
+<h2 class="font-headline text-xl font-bold uppercase tracking-tight text-primary mb-1">游戏记录列表</h2>
+<p class="text-xs text-on-surface-variant tracking-widest uppercase">Combat Archives</p>
+</div>
+<div class="space-y-4">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase font-bold text-outline tracking-widest">Game Mode / 游戏模式</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 text-xs font-bold bg-tertiary-container text-on-tertiary rounded-sm cursor-pointer">全部</span>
+<span class="px-3 py-1 text-xs font-bold bg-surface-container-highest text-on-surface-variant rounded-sm hover:text-on-surface transition-colors cursor-pointer">排位赛</span>
+<span class="px-3 py-1 text-xs font-bold bg-surface-container-highest text-on-surface-variant rounded-sm hover:text-on-surface transition-colors cursor-pointer">匹配赛</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase font-bold text-outline tracking-widest">Outcome / 胜负</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-surface-container-lowest border-b-2 border-primary py-2 text-xs font-bold text-primary">胜利 (WIN)</button>
+<button class="bg-surface-container-lowest border-b-2 border-outline-variant py-2 text-xs font-bold text-on-surface-variant">失败 (LOSS)</button>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase font-bold text-outline tracking-widest">Time Range / 时间范围</label>
+<select class="bg-surface-container-lowest border-none border-b-2 border-outline text-xs text-on-surface focus:border-primary focus:ring-0 w-full py-2 px-0">
+<option>过去 24 小时</option>
+<option>过去 7 天</option>
+<option>本月</option>
+</select>
+</div>
+</div>
+<div class="mt-auto pt-8 border-t border-outline-variant/20">
+<div class="flex items-center gap-3 p-4 bg-surface-container-low rounded hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<div>
+<div class="text-[10px] font-bold text-secondary uppercase tracking-widest leading-none">Global Stats</div>
+<div class="text-xs text-on-surface-variant">查看全服排名</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content: Match Cards -->
+<section class="flex-grow space-y-6">
+<!-- Mobile Filters (Visible on small screens) -->
+<div class="lg:hidden flex overflow-x-auto gap-3 pb-4 no-scrollbar">
+<button class="shrink-0 bg-tertiary-container text-on-tertiary px-4 py-2 text-xs font-bold uppercase">All Modes</button>
+<button class="shrink-0 bg-surface-container-highest text-on-surface-variant px-4 py-2 text-xs font-bold uppercase">Ranked</button>
+<button class="shrink-0 bg-surface-container-highest text-on-surface-variant px-4 py-2 text-xs font-bold uppercase">Normal</button>
+</div>
+<!-- Match Card 1: WIN -->
+<div class="glass-card relative group overflow-hidden transition-all duration-300 hover:translate-x-1 border-r border-primary/10">
+<div class="flex flex-col md:flex-row items-stretch">
+<div class="w-full md:w-48 h-32 md:h-auto overflow-hidden relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Cyberpunk warrior character profile in neon armor, dynamic lighting, dramatic futuristic composition with cyan accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9Txxqc1ATdZYW6hdeASsSp-1cAfzCcxs1IlOzzGDaPLa25-XK5rCenrycs1N0wwXbl_uD3Ez-plMZeT7xUBXqDNnHzs1fqb-M2Rsy-P9Y0_LiOLPVYnVam-fyaX-Ap3Navlx7mhBh2eXW41_KENns7snBKcv9PGcxjr3fD8h6S7GQsAeb5Z9kAGtMn_nATIEhT73ywavERq2hQAla5_7JUcMGLle3bSbk5L9MBHXe1r1hEgPRjo17wqCUxUkyl12dY92HdXKPzno"/>
+<div class="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-transparent"></div>
+</div>
+<div class="flex-grow p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="space-y-1">
+<div class="flex items-center gap-3">
+<span class="text-2xl font-black font-headline text-primary status-glow-win italic tracking-tighter uppercase">WIN</span>
+<span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 font-bold tracking-widest uppercase">Ranked Solo</span>
+</div>
+<div class="text-on-surface-variant text-xs flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>2024-05-24 18:42</span>
+<span class="mx-2 opacity-30">|</span>
+<span>32:15 分钟</span>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-center">
+<div class="text-[10px] font-bold text-outline-variant uppercase tracking-widest mb-1">KDA</div>
+<div class="text-xl font-headline font-bold text-on-surface">14 <span class="text-primary-dim">/</span> 2 <span class="text-primary-dim">/</span> 9</div>
+</div>
+<div class="text-center">
+<div class="text-[10px] font-bold text-outline-variant uppercase tracking-widest mb-1">Impact</div>
+<div class="text-xl font-headline font-bold text-tertiary">98.2</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-high hover:bg-surface-bright px-4 py-3 text-[10px] font-black uppercase tracking-tighter border border-outline-variant/30 transition-all">
+                Detailed Stats
+              </button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-4 py-3 text-[10px] font-black uppercase tracking-tighter active:scale-95 transition-transform shadow-[0_0_15px_rgba(143,245,255,0.3)]">
+                View Replay
+              </button>
+</div>
+</div>
+</div>
+<!-- Decorative Glow -->
+<div class="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
+</div>
+<!-- Match Card 2: LOSS -->
+<div class="glass-card relative group overflow-hidden transition-all duration-300 hover:translate-x-1 border-r border-error/10">
+<div class="flex flex-col md:flex-row items-stretch">
+<div class="w-full md:w-48 h-32 md:h-auto overflow-hidden relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="High-tech gaming computer parts glowing with purple and red ambient light in a dark room, cinematic detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCve-E1zvgmCFLRo_e8yM9mNQ_jRsaTbtU_aezC9AK-7it_HYcpadyQz3zYxdE_fZ-71RUuNE244Ab6J8O9YgAa4yo6kZWM1pbuF8l7BfaF9uDSkZ627FUVWvrDVJvu8C1Eec_lUeuusVtEJsTSDixkvVz6uFmOhLi5zcryRa2VudMmHruBqtfIaKc7qoi7Me95p9N4kAzXhUM26VUVhHGBy5iQiopRVH4xBcwHreJ84bwjQqlVmXQczZ95FxTePT9qkFDt_zOnlL8"/>
+<div class="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-transparent"></div>
+</div>
+<div class="flex-grow p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 opacity-80 hover:opacity-100 transition-opacity">
+<div class="space-y-1">
+<div class="flex items-center gap-3">
+<span class="text-2xl font-black font-headline text-error status-glow-loss italic tracking-tighter uppercase">LOSS</span>
+<span class="text-[10px] bg-error/10 text-error px-2 py-0.5 font-bold tracking-widest uppercase">Matchmaking</span>
+</div>
+<div class="text-on-surface-variant text-xs flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>2024-05-24 16:15</span>
+<span class="mx-2 opacity-30">|</span>
+<span>45:02 分钟</span>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-center">
+<div class="text-[10px] font-bold text-outline-variant uppercase tracking-widest mb-1">KDA</div>
+<div class="text-xl font-headline font-bold text-on-surface">3 <span class="text-error-dim">/</span> 8 <span class="text-error-dim">/</span> 5</div>
+</div>
+<div class="text-center">
+<div class="text-[10px] font-bold text-outline-variant uppercase tracking-widest mb-1">Impact</div>
+<div class="text-xl font-headline font-bold text-on-surface-variant">42.1</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-high hover:bg-surface-bright px-4 py-3 text-[10px] font-black uppercase tracking-tighter border border-outline-variant/30 transition-all">
+                Detailed Stats
+              </button>
+<button class="bg-surface-container-lowest text-on-surface-variant px-4 py-3 text-[10px] font-black uppercase tracking-tighter border border-error/30">
+                LOCKED
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Match Card 3: WIN -->
+<div class="glass-card relative group overflow-hidden transition-all duration-300 hover:translate-x-1 border-r border-primary/10">
+<div class="flex flex-col md:flex-row items-stretch">
+<div class="w-full md:w-48 h-32 md:h-auto overflow-hidden relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Digital HUD interface elements floating over a blurred tech background, cyan and magenta color palette, data visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOIeCpQNQtn6GvMW-Ohii1qy3mWa4yC1XVg-j-TW60_32HRz-55hyiPDUnJ_ayxLISi-MOQeI_9ILwaEPoVk-bLqnnwrE_ySPmwwn9c5-6wQY9vRRBTvzcjWEJbM7WEZo7kXF-a8CQj6uXGQX49pZ7zns_xazBD8htZcWxh7Cy_is5DUCi8YhNfpX-C0ZtaTL_KEWnuw26Mxu_zZcGA1FCzDYS84UuQuKh1EsA7NH5c8THtETksTU2RUrR5A3jYghSW-e4oPAHRJ4"/>
+<div class="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-transparent"></div>
+</div>
+<div class="flex-grow p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="space-y-1">
+<div class="flex items-center gap-3">
+<span class="text-2xl font-black font-headline text-primary status-glow-win italic tracking-tighter uppercase">WIN</span>
+<span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 font-bold tracking-widest uppercase">Ranked Solo</span>
+</div>
+<div class="text-on-surface-variant text-xs flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>2024-05-23 22:10</span>
+<span class="mx-2 opacity-30">|</span>
+<span>24:50 分钟</span>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-center">
+<div class="text-[10px] font-bold text-outline-variant uppercase tracking-widest mb-1">KDA</div>
+<div class="text-xl font-headline font-bold text-on-surface">11 <span class="text-primary-dim">/</span> 4 <span class="text-primary-dim">/</span> 15</div>
+</div>
+<div class="text-center">
+<div class="text-[10px] font-bold text-outline-variant uppercase tracking-widest mb-1">Impact</div>
+<div class="text-xl font-headline font-bold text-tertiary">85.9</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-high hover:bg-surface-bright px-4 py-3 text-[10px] font-black uppercase tracking-tighter border border-outline-variant/30 transition-all">
+                Detailed Stats
+              </button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-4 py-3 text-[10px] font-black uppercase tracking-tighter active:scale-95 transition-transform">
+                View Replay
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-[#1f1f26] bg-[#0e0e13] flex flex-col items-center justify-center gap-4">
+<div class="text-[#8ff5ff] font-bold text-xl font-['Space_Grotesk'] tracking-widest">KINETIC_OS</div>
+<div class="flex gap-8">
+<a class="text-[10px] tracking-widest text-[#48474d] hover:text-[#deffab] transition-colors uppercase" href="#">Privacy</a>
+<a class="text-[10px] tracking-widest text-[#48474d] hover:text-[#deffab] transition-colors uppercase" href="#">Terms</a>
+<a class="text-[10px] tracking-widest text-[#48474d] hover:text-[#deffab] transition-colors uppercase" href="#">Support</a>
+</div>
+<p class="font-['Inter'] text-[10px] tracking-widest text-[#acaab1] uppercase">© 2024 KINETIC_OS // HIGH PERFORMANCE INTERFACE</p>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 bg-[#131318]/90 backdrop-blur-lg border-t border-[#48474d]/30 flex justify-around items-center pb-safe z-50">
+<a class="flex flex-col items-center justify-center text-[#acaab1]" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8ff5ff] drop-shadow-[0_0_5px_rgba(143,245,255,0.8)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sports_esports</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Matches</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#acaab1]" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#acaab1]" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Profile</span>
+</a>
+</nav>
+</body></html>
